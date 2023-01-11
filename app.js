@@ -77,5 +77,34 @@ function validTri(a, b, c) {
 
 // Exercise 5
 
-
+function dailyUsage(planLimit, day, usage) {
+    const dayPeriod = 30;
+    const expectedAvgUse = (planLimit / dayPeriod).toFixed(2);
+    const averageUsageSoFar = (usage / day).toFixed(2);
+    const projectedTotalUsage = averageUsageSoFar * dayPeriod;
+    const totalUsageDifference = projectedTotalUsage - planLimit;
+    const remainingData = planLimit - usage;
+    const daysRemaining = dayPeriod - day;
+    const gbPerDayCorrection = (remainingData / daysRemaining).toFixed(2);
+  
+    if (remainingData <= 0) {
+      console.log(`You are completely out of data :(`);
+    }
+  
+    console.log(`${day} days used, ${daysRemaining} days remaining`);
+    console.log(`Expected average daily use: ${expectedAvgUse} GB/day`);
+  
+    //Exceeding Text
+    if (projectedTotalUsage > planLimit) {
+      console.log(
+        `You are Exceeding your daily average use ${averageUsageSoFar} GB/day. Continuing this high usage, you'll exceed your data plan by ${totalUsageDifference} GB/day. To stay below your data plan, use no more than ${gbPerDayCorrection}.`
+      );
+    } else if (projectedTotalUsage < planLimit) {
+      console.log(
+        `You are below your daily average use ${averageUsageSoFar} GB/day. To get the most out of your data plan, start using ${gbPerDayCorrection} per day.`
+      );
+    }
+  }
+  
+  dailyUsage(100, 15, 30);
   
